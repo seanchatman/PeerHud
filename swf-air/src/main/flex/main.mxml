@@ -5,28 +5,51 @@
      <mx:Script>
    <![CDATA[
 	     import com.blogspot.mszalbach.Utils;
+	     import com.peerhud.utils.TimeObject;
 
 	     import mx.events.FlexEvent;
 
 	     private function onCreationComplete(event:FlexEvent):void
 	     {
-		     testLabel.text = 'wtf'
 		     netConnection = new NetConnection();
-		     netConnection.addEventListener(NetStatusEvent.NET_STATUS, onNetStatus
-		     );
-		     netConnection.connect(CirrusAddress, DeveloperKey);
+		     netConnection.addEventListener(NetStatusEvent.NET_STATUS, onNetStatus);
+//		     netConnection.connect(CirrusAddress, DeveloperKey);
+
+			dragonTime.addEventListener(TimerEvent.TIMER, onDragonTime);
 	     }
 
 	     private const CirrusAddress:String = "rtmfp://p2p.rtmfp.net/12ff5162e5a44b13d295fa92-1e75ec2883f4/";
 	     private const DeveloperKey:String = "12ff5162e5a44b13d295fa92-1e75ec2883f4";
 	     private var netConnection:NetConnection;
 
+	     public function onDragonTime(event:Event):void
+	     {
+		     dragonLabel.text = dragonTime.remainingTime.toString();
+	     }
 
 	     private function onNetStatus(event:NetStatusEvent):void
 	     {
-
+		     trace(event.toString());
 	     }
+
+	     private var dragonTime:TimeObject = new TimeObject(15, "dragon");
+	     private var baronTime:TimeObject = new TimeObject(420, "baron");
+
+
 	     ]]>
- </mx:Script>
-    <mx:Label id="testLabel" text="{Utils.getGreeting()} testing debug"/>
+</mx:Script>
+    <mx:Form>
+	    <mx:FormItem label="Dragon Time">
+			<mx:Label id="dragonLabel"/>
+	    </mx:FormItem>
+	    <mx:FormItem>
+		    <mx:Button id="dragonButton" label="Reset Timer" click="dragonTime.start()"/>
+	    </mx:FormItem>
+	    <mx:FormItem label="Baron Time">
+		    <mx:Label id="baronLabel"/>
+	    </mx:FormItem>
+	    <mx:FormItem>
+		    <mx:Button id="baronButton" label="Reset Timer" click="baronTime.start()"/>
+	    </mx:FormItem>
+    </mx:Form>
 </mx:WindowedApplication>
