@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>peerhud</artifactId>
+        <groupId>com.peerhud</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>PeerHud</artifactId>
+    <description>This does the packaging of the PeerHud application</description>
+
+    <packaging>air</packaging>
+
+    <properties>
+        <keystore.password>123</keystore.password>
+        <air.version.number>1.0</air.version.number>
+    </properties>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.sonatype.flexmojos</groupId>
+                <artifactId>flexmojos-maven-plugin</artifactId>
+                <configuration>
+                    <storepass>${keystore.password}</storepass>
+                    <!-- Not needed if the descriptor file is not filtered. -->
+                    <descriptorTemplate>${project.build.outputDirectory}/descriptor.xml</descriptorTemplate>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.blogspot.mszalbach</groupId>
+            <artifactId>swf-air</artifactId>
+            <version>${project.version}</version>
+            <type>swf</type>
+        </dependency>
+    </dependencies>
+
+</project>
