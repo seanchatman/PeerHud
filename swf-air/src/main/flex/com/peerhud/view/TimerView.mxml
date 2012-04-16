@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
+    xmlns:mx="library://ns.adobe.com/flex/mx" click="onClick()">
+    <fx:Script><![CDATA[
+		import com.peerhud.utils.TimeObject;
+
+		import flash.events.TimerEvent;
+		import flash.filters.DropShadowFilter;
+		import flash.filters.GlowFilter;
+
+		[Bindable]
+		public var source:Class;
+		public var type:String;
+
+		private var _totalSeconds:int;
+		private var _timeObject:TimeObject;
+
+		public function get totalSeconds():int
+		{
+			return _totalSeconds;
+		}
+
+		public function set totalSeconds(value:int):void
+		{
+			_totalSeconds = value;
+			_timeObject = new TimeObject(value);
+			_timeObject.addEventListener(TimerEvent.TIMER, onTimer, false, 0, true);
+		}
+
+		private function onTimer(event:TimerEvent):void
+		{
+			timeLabel.text = _timeObject.toRemainingString();
+		}
+
+		private function onClick():void
+		{
+			_timeObject.start()
+		}
+		]]></fx:Script>
+    <s:Image source="{source}"/>
+    <mx:Label id="timeLabel" bottom="0" horizontalCenter="0" color="#FFFFFF" fontSize="30"
+			filters="{[new GlowFilter(0,.7,5,5,50)]}"/>
+</s:Group>

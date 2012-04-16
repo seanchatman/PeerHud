@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>PeerHud</artifactId>
-    <description>This does the packaging of the PeerHud application</description>
+    <description>PeerHud</description>
 
     <packaging>air</packaging>
 
@@ -41,7 +41,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.blogspot.mszalbach</groupId>
+            <groupId>com.peerhud</groupId>
             <artifactId>swf-air</artifactId>
             <version>${project.version}</version>
             <type>swf</type>
