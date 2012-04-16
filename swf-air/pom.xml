@@ -36,12 +36,12 @@
             <artifactId>air-framework</artifactId>
             <type>pom</type>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>com.peerhud</groupId>
             <artifactId>swc-library</artifactId>
             <version>${project.version}</version>
             <type>swc</type>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>org.robotlegs</groupId>
             <artifactId>robotlegs-framework</artifactId>
