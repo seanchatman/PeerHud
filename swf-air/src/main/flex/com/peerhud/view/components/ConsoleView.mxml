@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
+	xmlns:mx="library://ns.adobe.com/flex/mx">
+
+	<fx:Script><![CDATA[
+		import com.peerhud.event.PeerTimerEvent;
+		import com.peerhud.utils.PeerTimer;
+
+		public var username:String;
+		public var gameSeconds:Number
+
+		public function printPeerTimerEvent(event:PeerTimerEvent):void
+		{
+			consoleTextArea.text += event.vo.username + " clicked " + event.vo.objectiveName + "\n";// + 'at' + PeerTimer.formatTime(gameSeconds + event.vo.objectiveSeconds) + '\n';
+		}
+
+		]]></fx:Script>
+
+	<s:TextArea id="consoleTextArea" fontSize="16" color="#000000" width="300" height="600"/>
+
+</s:VGroup>

@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
+		 xmlns:mx="library://ns.adobe.com/flex/mx" click="onClick()">
+
+	<fx:Metadata>
+		[Event(name="ptClick", type="com.peerhud.event.PTViewEvent")]
+	</fx:Metadata>
+
+	<fx:Script><![CDATA[
+		import com.peerhud.event.PTViewEvent;
+		import com.peerhud.model.vo.PeerTimerEventVO;
+		import com.peerhud.utils.PeerTimer;
+
+		import flash.events.TimerEvent;
+		import flash.filters.DropShadowFilter;
+		import flash.filters.GlowFilter;
+
+		[Bindable]
+		public var source:Class;
+
+		public var objectiveName:String;
+		private var _objectiveSeconds:int;
+		private var _timeObject:PeerTimer;
+
+		public function start():void
+		{
+			_timeObject.start();
+		}
+
+		public function get objectiveSeconds():int
+		{
+			return _objectiveSeconds;
+		}
+
+		public function set objectiveSeconds(value:int):void
+		{
+			_objectiveSeconds = value;
+			_timeObject = new PeerTimer(value);
+			_timeObject.addEventListener(TimerEvent.TIMER, onTimer, false, 0, true);
+			_timeObject.addEventListener(TimerEvent.TIMER_COMPLETE, onComplete, false, 0, true);
+
+		}
+
+		private function onTimer(event:TimerEvent):void
+		{
+			timeLabel.text = _timeObject.toTimeDisplayString();
+		}
+
+		private function onComplete(event:TimerEvent):void
+		{
+			var timerSound:Sound = new EmbeddedAssets.timerSound as Sound;
+			timerSound.play();
+		}
+
+		private function onClick():void
+		{
+			dispatchEvent(new PTViewEvent(PTViewEvent.CLICK, objectiveName, objectiveSeconds));
+		}
+		]]></fx:Script>
+	<s:Image source="{source}"/>
+	<mx:Label id="timeLabel" bottom="0" horizontalCenter="0" color="#FFFFFF" fontSize="30"
+			  filters="{[new GlowFilter(0,.7,5,5,50)]}"/>
+</s:Group>

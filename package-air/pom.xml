@@ -19,6 +19,14 @@
         <air.version.number>1.0</air.version.number>
     </properties>
 
+    <distributionManagement>
+        <repository>
+            <id>peerhud-maven</id>
+            <name>PeerHud Maven Release</name>
+            <url>s3://peer-hud/release</url>
+        </repository>
+    </distributionManagement>
+
     <build>
         <resources>
             <resource>
@@ -37,6 +45,13 @@
                 </configuration>
             </plugin>
         </plugins>
+        <extensions>
+            <extension>
+                <groupId>org.springframework.build.aws</groupId>
+                <artifactId>org.springframework.build.aws.maven</artifactId>
+                <version>3.0.0.RELEASE</version>
+            </extension>
+        </extensions>
     </build>
 
     <dependencies>

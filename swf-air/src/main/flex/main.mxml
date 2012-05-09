@@ -1,28 +1,27 @@
 <?xml version="1.0"?>
 <s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
-                       xmlns:mx="library://ns.adobe.com/flex/mx"
-						xmlns:view="com.peerhud.view.*"
-		width="120"
-		height="520">
+	xmlns:mx="library://ns.adobe.com/flex/mx"
+	xmlns:view="com.peerhud.view.*"
+	xmlns:rl2="http://ns.robotlegs.org/flex/rl2"
+	xmlns:peer="com.peerhud.*"
+	xmlns:comp="com.peerhud.view.components.*"
+	width="500"
+	height="650"
+	>
+
+	<fx:Declarations>
+		<peer:PeerHudContext contextView="{this}"/>
+	</fx:Declarations>
 
 <fx:Script><![CDATA[
-
-    [Embed(source='../resources/Baron_Nashor.png')]
-    public var baron:Class;
-    [Embed(source='../resources/DragonSquare.png')]
-    public var dragon:Class;
-    [Embed(source='../resources/GolemSquare.png')]
-    public var golem:Class;
-    [Embed(source='../resources/LizardSquare.png')]
-    public var lizard:Class;
-
-    ]]></fx:Script>
-    <s:VGroup id="mainVGroup">
-		<view:TimerView type="baron" source="{baron}" totalSeconds="420"/>
-		<view:TimerView type="dragon" source="{dragon}" totalSeconds="360"/>
-		<view:TimerView type="golem" source="{golem}" totalSeconds="300"/>
-		<view:TimerView type="lizard" source="{lizard}" totalSeconds="300"/>
-    </s:VGroup>
-	<view:ChatDemo/>
+	import com.peerhud.event.PTViewEvent;
+	]]></fx:Script>
+	<s:VGroup>
+		<comp:ConnectionHeaderView width="100%"/>
+		<s:HGroup>
+			<comp:PeerTimerGroupView/>
+			<comp:ConsoleView/>
+		</s:HGroup>
+	</s:VGroup>
 </s:WindowedApplication>
 

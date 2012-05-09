@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
+		xmlns:mx="library://ns.adobe.com/flex/mx"
+		xmlns:comp="com.peerhud.view.components.*" creationComplete="creationCompleteHandler(event)">
+	<fx:Script><![CDATA[
+		import com.peerhud.event.PTViewEvent;
+		import mx.events.FlexEvent;
+
+		private function creationCompleteHandler(event:FlexEvent):void
+		{
+			baron.addEventListener(PTViewEvent.CLICK, onItemClick);
+			dragon.addEventListener(PTViewEvent.CLICK, onItemClick);
+			lizard.addEventListener(PTViewEvent.CLICK, onItemClick);
+			golem.addEventListener(PTViewEvent.CLICK, onItemClick);
+		}
+
+		private function onItemClick(event:Event):void
+		{
+			dispatchEvent(event.clone());
+		}
+		]]></fx:Script>
+
+	<s:VGroup id="mainVGroup">
+		<comp:PeerTimerView id="baron" source="{EmbeddedAssets.baron}" objectiveName="baron" objectiveSeconds="420"/>
+		<comp:PeerTimerView id="dragon" source="{EmbeddedAssets.dragon}" objectiveName="dragon" objectiveSeconds="360"/>
+		<comp:PeerTimerView id="golem" source="{EmbeddedAssets.golem}" objectiveName="golem" objectiveSeconds="300"/>
+		<comp:PeerTimerView id="lizard" source="{EmbeddedAssets.lizard}" objectiveName="lizard" objectiveSeconds="300"/>
+	</s:VGroup>
+</s:VGroup>

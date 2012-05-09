@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<s:HGroup xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
+	xmlns:mx="library://ns.adobe.com/flex/mx" creationComplete="onCreationComplete(event)">
+	<fx:Script><![CDATA[
+		import com.peerhud.utils.PeerTimer;
+
+		import flash.filters.GlowFilter;
+
+		import mx.events.FlexEvent;
+
+		private var _gameTimeObject:PeerTimer;
+
+		private function onPlusClick(event:MouseEvent):void
+		{
+			_gameTimeObject.elapsedSeconds++;
+			onTimer(null);
+		}
+
+		private function onMinusClick(event:MouseEvent):void
+		{
+			_gameTimeObject.elapsedSeconds--;
+			onTimer(null);
+		}
+
+		private function onTimer(event:TimerEvent):void
+		{
+			timeLabel.text = _gameTimeObject.toTimeDisplayString();
+		}
+
+		private function onReset(event:MouseEvent):void
+		{
+			_gameTimeObject.elapsedSeconds = 0;
+			onTimer(null);
+		}
+
+		private function onCreationComplete(event:FlexEvent):void
+		{
+			_gameTimeObject = new PeerTimer(0, PeerTimer.FORWARDS);
+			_gameTimeObject.addEventListener(TimerEvent.TIMER, onTimer, false, 0, true);
+			_gameTimeObject.start();
+		}
+		]]></fx:Script>
+	<s:VGroup id="timeGroup" visible="false">
+		<mx:Label text="Game Time" color="#FFFFFF" fontSize="20"
+				  filters="{[new GlowFilter(0)]}"/>
+
+		<s:HGroup verticalAlign="middle">
+			<mx:Label id="timeLabel" bottom="0" color="#FFFFFF" fontSize="20"
+				  filters="{[new GlowFilter(0)]}"/>
+			<s:Button label="+" click="onPlusClick(event)" width="30"/>
+			<s:Button label="-" click="onMinusClick(event)" width="30"/>
+		</s:HGroup>
+		<s:HGroup verticalAlign="middle">
+			<s:Button label="reset" click="onReset(event)"/>
+		</s:HGroup>
+	</s:VGroup>
+	<s:Form>
+		<s:FormItem label="summonerName">
+			<s:TextInput id="usernameInput"/>
+		</s:FormItem>
+		<s:FormItem label="roomName">
+			<s:TextInput id="roomNameInput" text="default"/>
+		</s:FormItem>
+		<s:Button id="connectButton" label="connect"/>
+	</s:Form>
+</s:HGroup>
